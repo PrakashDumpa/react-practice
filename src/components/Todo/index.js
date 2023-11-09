@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 // import { NavLink, Outlet, useParams, useLocation } from "react-router-dom";
 
@@ -13,9 +13,14 @@ const Todo = () => {
   const [inputText, setInputText] = useState("");
   const [editInput, setEditInput] = useState("");
   const [todoList, setTodoList] = useState([]);
+  const inputFocus = useRef(null);
+
+  useEffect(() => {
+    inputFocus.current.focus();
+  }, []);
 
   //   access the data from home route while we are navigating.
-  const location = useLocation();
+  // const location = useLocation();
   // console.log(location);
   // console.log("----------------", location);
   // ---------------------------------------------
@@ -76,6 +81,7 @@ const Todo = () => {
       <div className="flex flex-col items-center  py-5 grow">
         <div className="flex justify-center bg-sky-500 h-10 w-[50%]">
           <input
+            ref={inputFocus}
             type="text"
             value={inputText}
             className="w-[100%] pl-3 bg-gray-200 text-xl"
